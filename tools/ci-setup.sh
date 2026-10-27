@@ -6,7 +6,7 @@
 #  tools/ci-setup.sh <dir>
 #
 # On Linux and macOS, libneko goes in /usr/local/lib, where Haxe's own haxelib and neko
-#  on Linux look for it.
+#  on Linux look for it, and NEKOPATH names neko's folder for the steps after this one.
 set -e
 
 HAXE_VERSION=4.3.7
@@ -48,6 +48,12 @@ if [ "$os" != windows ]; then
 	sudo cp -P "$dir/neko"/libneko* /usr/local/lib/
 	if [ "$os" = linux ]; then
 		sudo ldconfig
+	fi
+	# Neko, and Haxe's haxelib, which is neko with haxelib attached, find std.ndll and
+	#  neko's other libraries through NEKOPATH; on Windows, beside neko.dll
+	export NEKOPATH="$dir/neko"
+	if [ -n "$GITHUB_ENV" ]; then
+		echo "NEKOPATH=$NEKOPATH" >> "$GITHUB_ENV"
 	fi
 fi
 
