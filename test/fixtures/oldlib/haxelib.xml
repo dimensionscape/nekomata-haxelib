@@ -1,0 +1,10 @@
+<project name="oldlib" url="https://github.com/dimensionscape/nekomata-haxelib" license="MIT">
+	<user name="dimensionscape"/>
+	<tag v="test"/>
+	<tag v="old"/>
+	<description>A library described in haxelib.xml, the format before haxelib.json</description>
+	<version name="1.2.3">Converted by haxelib convertxml</version>
+	<depends name="printargs" version="1.0.0"/>
+	<depends name="deplib"/>
+	<depends name="spawner"/>
+</project>

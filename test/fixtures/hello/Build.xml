@@ -1,0 +1,9 @@
+<xml>
+	<!-- One C file, built into an executable by hxcpp's build tool -->
+	<files id="hello">
+		<file name="main.c"/>
+	</files>
+	<target id="default" output="hello" tool="linker" toolid="exe">
+		<files id="hello"/>
+	</target>
+</xml>

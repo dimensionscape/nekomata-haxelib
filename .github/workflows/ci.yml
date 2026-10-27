@@ -1,0 +1,53 @@
+# Builds the port against libhxcpp's main branch and runs the tests, with stock haxelib
+#  on neko as the oracle, on each system the port supports
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    # A command that waits on stdin, as haxelib run hxcpp does when libhxcpp's build
+    #  tool is missing, would otherwise hold the job for hours
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Check out libhxcpp
+        uses: actions/checkout@v5
+        with:
+          repository: openfl/libhxcpp
+          path: libhxcpp
+
+      - name: Install Haxe and neko
+        run: tools/ci-setup.sh "$RUNNER_TEMP/toolchain"
+
+      - name: Fetch haxelib and Nekomata
+        run: tools/fetch.sh
+
+      # A source checkout of libhxcpp needs its build tool, hxcpp.n, built before
+      #  haxelib run hxcpp works; without it, hxcpp asks whether to build it and waits
+      - name: Point hxcpp at libhxcpp
+        run: |
+          (cd libhxcpp/tools/hxcpp && haxe compile.hxml)
+          haxelib newrepo
+          libhxcpp=$(pwd)/libhxcpp
+          if [ "$RUNNER_OS" = Windows ]; then libhxcpp=$(cygpath -m "$libhxcpp"); fi
+          haxelib dev hxcpp "$libhxcpp"
+          haxelib path hxcpp
+
+      - name: Build the port
+        run: haxe build.hxml
+
+      - name: Run the tests
+        run: haxe test/harness.hxml --strict

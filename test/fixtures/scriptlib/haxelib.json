@@ -1,0 +1,11 @@
+{
+	"name": "scriptlib",
+	"url": "https://github.com/dimensionscape/nekomata-haxelib",
+	"license": "MIT",
+	"tags": ["test"],
+	"description": "A library run as Haxe source, with haxe --run",
+	"version": "1.0.0",
+	"releasenote": "A fixture of the tests",
+	"contributors": ["dimensionscape"],
+	"dependencies": {}
+}

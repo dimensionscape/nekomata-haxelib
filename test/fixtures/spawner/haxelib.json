@@ -1,0 +1,11 @@
+{
+	"name": "spawner",
+	"url": "https://github.com/dimensionscape/nekomata-haxelib",
+	"license": "MIT",
+	"tags": ["test"],
+	"description": "A run.n that starts neko itself",
+	"version": "1.0.0",
+	"releasenote": "A fixture of the tests",
+	"contributors": ["dimensionscape"],
+	"dependencies": {}
+}

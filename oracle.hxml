@@ -1,0 +1,6 @@
+# Stock haxelib for neko, the oracle the tests compare the port with: haxelib's own
+#  client.hxml, writing run.n to bin/oracle rather than over the run.n in haxelib's tree
+--cwd haxelib
+each.hxml
+-neko ../bin/oracle/run.n
+-main haxelib.client.Main

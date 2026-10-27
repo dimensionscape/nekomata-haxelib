@@ -1,0 +1,27 @@
+# The port: haxelib's client, as Haxe 4.3.7 ships it, compiled to C++ with Nekomata's
+#  sources linked in, so that it runs library scripts in its own process. Writes
+#  bin/haxelib, and bin/neko, the same executable standing in for neko.
+#  tools/fetch.sh fetches haxelib/ and nekomata/ first
+# haxelib reads its version from haxelib.json and .git in the folder it builds in, so
+#  paths from here on are from haxelib/
+--cwd haxelib
+# haxelib's each.hxml, its client's class paths
+each.hxml
+-cp ../src
+-cp ../nekomata/src
+--main nekomata.haxelib.Main
+--macro nekomata.haxelib.Patches.apply()
+# What Nekomata's host.hxml builds its host with
+-D scriptable
+--dce no
+# The runtime is only named by generated scripts, so nothing else pulls it in
+--macro include("nekomata.rt")
+-D HXCPP_CATCH_SEGV
+-D HXCPP_STACK_TRACE
+-D HXCPP_STACK_LINE
+-D HAXE_OUTPUT_FILE=haxelib
+# A scriptable build lists its classes in export_classes.info, by default in the folder
+#  it builds in, which would leave haxelib/ changed and its version "dirty"
+-D dll_export=../bin/cpp/export_classes.info
+--cpp ../bin/cpp
+--cmd haxe --cwd ../tools --run Install ../bin/cpp ../bin

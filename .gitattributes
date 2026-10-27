@@ -1,0 +1,2 @@
+# Text files keep LF endings everywhere, as the shell scripts need
+* text=auto eol=lf

@@ -1,0 +1,8 @@
+# Fetched by tools/fetch.sh
+/haxelib/
+/nekomata/
+# A libhxcpp checkout, for building and for the tests
+/libhxcpp/
+# The local haxelib repository pointing hxcpp at libhxcpp
+/.haxelib/
+/bin/

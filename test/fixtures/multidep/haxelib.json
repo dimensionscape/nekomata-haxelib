@@ -1,0 +1,17 @@
+{
+	"name": "multidep",
+	"url": "https://github.com/dimensionscape/nekomata-haxelib",
+	"license": "MIT",
+	"tags": ["test"],
+	"description": "A library with several dependencies, which haxelib orders",
+	"version": "1.0.0",
+	"releasenote": "A fixture of the tests",
+	"contributors": ["dimensionscape"],
+	"classPath": "src",
+	"dependencies": {
+		"spawner": "",
+		"printargs": "1.0.0",
+		"scriptlib": "",
+		"deplib": ""
+	}
+}

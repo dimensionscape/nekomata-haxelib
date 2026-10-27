@@ -1,0 +1,12 @@
+{
+	"name": "gitlib",
+	"url": "https://github.com/dimensionscape/nekomata-haxelib",
+	"license": "MIT",
+	"tags": ["test"],
+	"description": "A library installed from a git repository",
+	"version": "0.1.0",
+	"releasenote": "A fixture of the tests",
+	"contributors": ["dimensionscape"],
+	"classPath": "src",
+	"dependencies": {}
+}

@@ -1,0 +1,3 @@
+# The tests: haxe test/harness.hxml [options], from the repository's root
+-cp test
+--run Harness
