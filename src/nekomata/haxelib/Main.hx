@@ -6,7 +6,9 @@ package nekomata.haxelib;
 class Main {
 	static function main() {
 		if (nekomata.Launcher.isNeko(Sys.programPath())) {
-			@:privateAccess nekomata.Main.main();
+			var code = nekomata.Main.run(Sys.args());
+			if (code != 0)
+				Sys.exit(code);
 			return;
 		}
 		try {

@@ -15,7 +15,7 @@ HAXELIB_REPO=https://github.com/HaxeFoundation/haxelib.git
 # The commit haxelib version prints on Haxe 4.3.7: 4.2.0 (20199d4e...)
 HAXELIB_COMMIT=20199d4e6c1eec17286efdc52067ad6ff94bb3d7
 NEKOMATA_REPO=https://github.com/dimensionscape/nekomata.git
-NEKOMATA_COMMIT=c0bc79b575c63ce15ae6c7ab8855f1f8443a295e
+NEKOMATA_COMMIT=35004e17e99a2796fa2f274cc274b9ece6994084
 
 root=$(cd "$(dirname "$0")/.." && pwd)
 

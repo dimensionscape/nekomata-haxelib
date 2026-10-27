@@ -20,20 +20,12 @@ class Runner {
 		return code;
 	}
 
-	// What neko <file> <args> does, as the Nekomata host does it
+	// What neko <file> <args> does, as the Nekomata host does it, on the JIT unless
+	//  NEKOMATA_JIT=0. Sys.executablePath() is neko's own path on neko, which scripts
+	//  start again to run other modules: here it is the neko beside this executable
 	static function runNeko(file:String, args:Array<String>):Int {
-		// The JIT is on unless NEKOMATA_JIT=0 turns it off, as for the host named neko
-		cpp.cppia.Host.enableJit(Sys.getEnv("NEKOMATA_JIT") != "0");
-		if (!untyped __cpp__("__scriptable_cppia_jit_active()"))
-			cpp.cppia.Host.enableJit(false);
-		// Sys.executablePath() is neko's own path on neko, which scripts start again to
-		//  run other modules: here it is the neko beside this executable
-		var neko = ownNeko();
-		if (neko != null) {
-			nekomata.rt.Primitives.init();
-			nekomata.rt.Primitives.add("std@sys_exe_path", 0, () -> nekomata.rt.Values.NString.of(neko));
-		}
-		return @:privateAccess nekomata.Main.runNeko(file, args, false);
+		nekomata.Main.setExePath(ownNeko());
+		return nekomata.Main.runModule(file, args);
 	}
 
 	static inline function windows():Bool
